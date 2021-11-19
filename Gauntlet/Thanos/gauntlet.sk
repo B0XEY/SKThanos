@@ -1,0 +1,66 @@
+on right click:
+	set {_i} to player's off hand item
+	if {_i} is a stick with nbt "{CustomModelData:4}":
+		if player is sneaking:
+			set metadata tag "GUI" of player to chest inventory with 6 rows named "&3&lGauntlet &7GUI"
+			loop 54 times:
+				set slot (loop-value - 1) of metadata tag "GUI" of player to gray stained glass pane named " "
+		
+		
+			#GAUNTLET SOUL
+			set slot 10 of metadata tag "GUI" of player to yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 28 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Heath Boost (&a+10&7)" and " "
+			set slot 37 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Soul Locator" and " "
+			
+			#GAUNTLET REALITY
+			set slot 11 of metadata tag "GUI" of player to red dye named "&c&lReality" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 29 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Entity Alter" and " "
+			set slot 38 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Matter Alter" and " "
+			
+			#GAUNTLET SPACE
+			set slot 12 of metadata tag "GUI" of player to light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 30 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Teleport" and " "
+			set slot 39 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Shield" and " "
+			
+			#GAUNTLET POWER
+			set slot 14 of metadata tag "GUI" of player to purple dye named "&d&lPower" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 32 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Damage enhancements" and " "
+			set slot 41 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Arrow Laser" and " "
+			
+			#GAUNTLET TIME
+			set slot 15 of metadata tag "GUI" of player to lime dye named "&a&lTime" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 33 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Weather manipulation" and " "
+			set slot 42 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Time manipulation" and " "
+			
+			#GAUNTLET Mind
+			set slot 16 of metadata tag "GUI" of player to orange dye named "&6&lMind" with nbt "{CustomModelData:1}" with lore " " and "&7Click to take out" and " "
+			set slot 34 of metadata tag "GUI" of player to Paper named "&71) " with lore " " and "&7- Snap" and " "
+			set slot 43 of metadata tag "GUI" of player to paper named "&72) " with lore " " and "&7- Player control" and " "
+			
+			
+			#HELP
+		
+			
+			wait 1 ticks
+			open (metadata tag "GUI" of player) to player
+		
+		
+		
+		
+		
+		
+on inventory click:
+	if event-inventory = (metadata tag "GUI" of player):
+		cancel event
+		if index of event-slot is 10:
+			make player say "/removestone soul"
+		if index of event-slot is 11:
+			make player say "/removestone reality"
+		if index of event-slot is 12:
+			make player say "/removestone space"
+		if index of event-slot is 14:
+			make player say "/removestone power"
+		if index of event-slot is 15:
+			make player say "/removestone time"
+		if index of event-slot is 16:
+			make player say "/removestone mind"

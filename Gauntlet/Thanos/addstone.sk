@@ -1,0 +1,66 @@
+options:
+	p: &6&kasd &8| &7
+
+
+on right click:
+	set {_i} to player's held item
+	if {_i} is lime dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {TimeS.%player%} is not set:
+				send " " and "{@p}&a&lTime &7stone added" and " "
+				set {TimeS.%player%} to true
+				remove 1 of player's held item from player
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+				
+	if {_i} is light blue dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {SpaceS.%player%} is not set:
+				send " " and "{@p}&b&lSpace &7stone added" and " "
+				remove 1 of player's held item from player
+				set {SpaceS.%player%} to true
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+				
+	if {_i} is red dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {RealityS.%player%} is not set:
+				send " " and "{@p}&c&lReality &7stone added" and " "
+				remove 1 of player's held item from player
+				set {RealityS.%player%} to true
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+				
+	if {_i} is orange dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {MindS.%player%} is not set:
+				send " " and "{@p}&6&lMind &7stone added" and " "
+				remove 1 of player's held item from player
+				set {MindS.%player%} to true
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+				
+	if {_i} is yellow dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {SoulS.%player%} is not set:
+				send " " and "{@p}&e&lSoul &7stone added" and " "
+				remove 1 of player's held item from player
+				set {SoulS.%player%} to true
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+				
+	if {_i} is purple dye with nbt "{CustomModelData:1}":
+		set {_i} to player's off hand item
+		if {_i} is a stick with nbt "{CustomModelData:4}":
+			if {PowerS.%player%} is not set:
+				send " " and "{@p}&d&lPower &7stone added" and " "
+				remove 1 of player's held item from player
+				set {PowerS.%player%} to true
+			else:
+				send " " and "{@p}&7Stone can't be added" and " "
+	

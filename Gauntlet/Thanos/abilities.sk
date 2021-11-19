@@ -1,0 +1,224 @@
+options:
+	#{TimeS.%player%} DONE
+	#{SpaceS.%player%} DONE
+	#{RealityS.%player%} DONE
+	#{MindS.%player%} DONE
+	#{SoulS.%player%} DONE
+	#{PowerS.%player%} DONE
+	time: 3 seconds
+	p: &7&kasd &8| &7
+
+#PASSIVE 
+
+#SOUL STONE
+every {@time}:
+	loop all players:
+		if {SoulS.%loop-player%} is set:
+			set the maximum health of the loop-player to 20
+			apply potion of regeneration of tier 2 to the loop-player for 999 days
+		else:
+			set the maximum health of the loop-player to 10
+			remove regeneration from the loop-player
+			
+#POWER STONE
+every {@time}:
+	loop all players:
+		if {PowerS.%loop-player%} is set:
+			apply potion of strength of tier 2 to the loop-player for 999 days
+		else:
+			remove strength from the loop-player
+
+#COMMANDS
+
+#SOUL STONE
+command locator [<player>]:
+	trigger:
+		if {SoulS.%player%} is set:
+			set {_loc} to location of arg-1
+			if {SpaceS.%player%} is set:
+				send " " and "{@p}%arg-1%&7 found at %{_loc}%" and " "
+				#send formatted " " and "{@p}%arg-1%&7 found at %{_loc}%" and "{@p}<command:/tp %player% %{_loc}%>&b&lClick me<reset>&7 to teleport" and " "
+			else:
+				send " " and "{@p}%arg-1%&7 found at %{_loc}%" and " "
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+
+
+#POWER STONE
+command lazer:
+	trigger:
+		if {PowerS.%player%} is set:
+			wait 3 ticks
+			loop 150 times:
+				make the player shoot a arrow at speed 10
+				wait 2 ticks
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+			
+#MIND STONE
+command view [<player>]:
+	trigger:
+		if {MindS.%player%} is set:
+			if {viewing.%player%} is not set:
+				if arg-1 is set:
+					set {viewing.%player%} to true
+					set {vp.%player%} to arg-1
+					set player's gamemode to spectator
+					set {lastloc.%player%} to location of player
+					wait 5 ticks
+					set spectator target of player to arg-1
+				else:
+					send " " and "{@p}&7No player" and " "
+			else:
+				if arg-1 is set:
+					set player's gamemode to spectator
+					set {viewing.%player%} to true
+					set {vp.%player%} to arg-1
+					set {lastloc.%player%} to location of player
+					wait 5 ticks
+					set spectator target of player to arg-1
+				else:
+					teleport player to {lastloc.%player%}
+					set player's gamemode to survival
+					delete {vp.%player%}
+					delete {viewing.%player%}
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+
+on any move:
+	if player's gamemode is spectator:
+		if {viewing.%player%} is set:
+			set spectator target of player to {vp.%player%}
+			
+			
+			
+			
+			
+command snap:
+	cooldown: 2 minute
+	cooldown message: You need to wait &l%remaining time% &rto use this command again!
+	cooldown bypass: snap.nocooldown
+	trigger:
+		if {MindS.%player%}, {TimeS.%player%}, {SpaceS.%player%}, {RealityS.%player%}, {PowerS.%player%}, and {SoulS.%player%} is set:
+			broadcast "{@p}SNAP!"
+			wait 5 ticks
+			set {_p} to player
+			loop all players:
+				chance of 35%:
+					broadcast "{@p}%loop-player%&7 dusted away"
+					kick loop-player due to "{@p}You were dusted away" 
+			
+			
+			
+#REALITY STONE
+command alter:
+	trigger:
+		if {RealityS.%player%} is set:
+			if {altered.%player%} is not set:
+				set {altered.%player%} to true
+				apply potion of invisibility of tier 10 to the player for 999 days
+				set flight mode of player to true
+			else:
+				remove invisibility from the player
+				set flight mode of player to false
+				delete {altered.%player%}
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+			
+command mob [<text>]:
+	usage: /spawn (mob)
+	trigger:
+		if {RealityS.%player%} is set:
+			if arg-1 is not set:
+				send "{@p} Please enter a mob" to player
+				stop
+			else:
+				set {mob} to ("%arg-1%" parsed as entitytype)
+				send "{@p} Your &c%arg-1% &7is getting ready to spawn"
+				wait 5 ticks
+				spawn {mob} at location of player
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+			
+#SPACE STONE
+command teleport [<number>] [<number>] [<number>]:
+	trigger:
+		if {SpaceS.%player%} is set:
+			if arg-1 is set:
+				if arg-2 is set:
+					if arg-3 is set:
+						execute console command "/tp %player% %arg-1% %arg-2% %arg-3%"
+					else:
+						send " " and "{@p}Need Z coord" and  " "
+				else:
+					send " " and "{@p}Need Y coord" and  " "
+			else:
+				send " " and "{@p}Need X coord" and  " "
+
+
+
+
+
+
+command shield:
+	cooldown: 2 minutes
+	cooldown message: You need to wait &l%remaining time% &rto use this command again!
+	cooldown bypass: shield.nocooldown
+	trigger:
+		if {SpaceS.%player%} is set:
+			set {shield.%player%} to true
+			send " " and "{@p}&7Shield on" and " "
+			wait 15 seconds
+			delete {shield.%player%}
+			send " " and "{@p}&7Shield down" and " "
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+on damage:
+	if {shield.%victim%} is set:
+		cancel event
+	if {shield.%attacker%} is set:
+		delete {shield.%attacker%}
+		send " " and "{@p}&7Shield down" and " " to attacker
+		
+		
+#TIME STONE
+command day:
+	trigger:
+		if {TimeS.%player%} is set:
+			set time to day
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+command night:
+	trigger:
+		if {TimeS.%player%} is set:
+			set time to night
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+command thunder:
+	trigger:
+		if {TimeS.%player%} is set:
+			set weather to thundering
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+command rain:
+	trigger:
+		if {TimeS.%player%} is set:
+			set weather to rain
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+command clear:
+	trigger:
+		if {TimeS.%player%} is set:
+			set weather to clear
+		else:
+			send " " and "{@p}&7Can't do this" and " "
+			
+			

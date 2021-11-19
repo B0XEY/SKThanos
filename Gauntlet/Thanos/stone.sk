@@ -1,0 +1,139 @@
+options:
+	p: &3&lStones &8| &7
+
+
+command stone <text>:
+	trigger:
+		if arg-1 is "Time":
+			set metadata tag "TSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "TSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "TSUI" of player to lime dye named "&a&lTime" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "TSUI" of player) to player
+		if arg-1 is "Power":
+			set metadata tag "PSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "PSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "PSUI" of player to purple dye named "&d&lPower" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "PSUI" of player) to player
+		if arg-1 is "Mind":
+			set metadata tag "MSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "MSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "MSUI" of player to orange dye named "&6&lMind" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "MSUI" of player) to player
+		if arg-1 is "Soul":
+			set metadata tag "SSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "SSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "SSUI" of player to yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "SSUI" of player) to player
+		if arg-1 is "Reality":
+			set metadata tag "RSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "RSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "RSUI" of player to red dye named "&4&lReality" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "RSUI" of player) to player
+		if arg-1 is "Space":
+			set metadata tag "SSUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "SSUI" of player to gray stained glass pane named " "
+		
+			set slot 4 of metadata tag "SSUI" of player to light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}"
+		
+			wait 1 ticks
+			open (metadata tag "SSUI" of player) to player
+		if arg-1 is "all":
+			set metadata tag "ASUI" of player to chest inventory with 1 rows named "&6&lStones &7GUI"
+			loop 9 times:
+				set slot (loop-value - 1) of metadata tag "ASUI" of player to gray stained glass pane named " "
+		
+			set slot 1 of metadata tag "ASUI" of player to lime dye named "&a&lTime" with nbt "{CustomModelData:1}"
+			set slot 2 of metadata tag "ASUI" of player to purple dye named "&d&lPower" with nbt "{CustomModelData:1}"
+			set slot 3 of metadata tag "ASUI" of player to light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}"
+			set slot 5 of metadata tag "ASUI" of player to red dye named "&4&lReality" with nbt "{CustomModelData:1}"
+			set slot 6 of metadata tag "ASUI" of player to yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}"
+			set slot 7 of metadata tag "ASUI" of player to orange dye named "&6&lMind" with nbt "{CustomModelData:1}"
+			
+			set slot 4 of metadata tag "ASUI" of player to stick named "&6&lGauntlet" with nbt "{CustomModelData:4}"
+		
+			wait 1 ticks
+			open (metadata tag "ASUI" of player) to player
+		
+
+
+
+
+
+
+
+
+
+
+on tab complete of  "/stone":
+    set tab completions for position 1 to "Space", "Reality", "Soul", "Mind", "Power", "Time", and "All"
+		
+		
+on inventory click:
+	if event-inventory = (metadata tag "ASUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			send " " and "{@p}Received all stones" and " "
+			add lime dye named "&a&lTime" with nbt "{CustomModelData:1}" to player
+			add light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}" to player
+			add red dye named "&4&lReality" with nbt "{CustomModelData:1}" to player
+			add purple dye named "&d&lPower" with nbt "{CustomModelData:1}" to player
+			add orange dye named "&6&lMind" with nbt "{CustomModelData:1}" to player
+			add yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}" to player
+			add stick named "&6&lGauntlet" with nbt "{CustomModelData:4}" to player
+	if event-inventory = (metadata tag "SSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			add light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&b&lSpace&7 stone received" and " "
+	if event-inventory = (metadata tag "RSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			add red dye named "&4&lReality" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&b&lSpace&7 stone received" and " "
+	if event-inventory = (metadata tag "TSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			add lime dye named "&a&lTime" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&a&lTime&7 stone received" and " "
+	if event-inventory = (metadata tag "PSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			add purple dye named "&d&lPower" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&d&lPower&7 stone received" and " "
+	if event-inventory = (metadata tag "MSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			add orange dye named "&6&lMind" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&6&lMind&7 stone received" and " "
+	if event-inventory = (metadata tag "RSUI" of player):
+		cancel event
+		if index of event-slot is 4:
+			close player's inventory
+			add yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}" to player
+			send " " and "{@p}&e&lSoul&7 stone received" and " "

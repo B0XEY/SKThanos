@@ -1,0 +1,15 @@
+on death:
+	if {TimeS.%player%} is true:
+		delete {TimeS.%player%}
+	if {PowerS.%player%} is true:
+		delete {PowerS.%player%}
+	if {MindS.%player%} is true:
+		delete {MindS.%player%}
+	if {SoulS.%player%} is true:
+		delete {SoulS.%player%}
+	if {RealityS.%player%} is true:
+		delete {RealityS.%player%}
+	if {SpaceS.%player%} is true:
+		delete {SpaceS.%player%}
+	
+	

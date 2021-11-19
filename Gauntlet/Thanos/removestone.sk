@@ -1,0 +1,86 @@
+options:
+	p: &6&kasd &8| &7
+
+
+command removestone <text>:
+	trigger:
+		if arg-1 is "Time":
+			if {TimeS.%player%} is true:
+				send " " and "{@p}&a&lTime &7stone removed" and " "
+				add lime dye named "&a&lTime" with nbt "{CustomModelData:1}" to player
+				delete {TimeS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "Power":
+			if {PowerS.%player%} is true:
+				send " " and "{@p}&d&lPower &7stone removed" and " "
+				add purple dye named "&d&lPower" with nbt "{CustomModelData:1}" to player
+				delete {PowerS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "Mind":
+			if {MindS.%player%} is true:
+				send " " and "{@p}&6&lMind &7stone removed" and " "
+				add orange dye named "&6&lMind" with nbt "{CustomModelData:1}" to player
+				delete {MindS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "Soul":
+			if {SoulS.%player%} is true:
+				send " " and "{@p}&e&lSoul &7stone removed" and " "
+				add yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}" to player
+				delete {SoulS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "Reality":
+			if {RealityS.%player%} is true:
+				send " " and "{@p}&c&lReality &7stone removed" and " "
+				add red dye named "&4&lReality" with nbt "{CustomModelData:1}" to player
+				delete {RealityS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "Space":
+			if {SpaceS.%player%} is true:
+				send " " and "{@p}&b&lSpace &7stone removed" and " "
+				add light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}" to player
+				delete {SpaceS.%player%}
+			else:
+				send " " and "{@p}Can't do this" and " "
+				
+		if arg-1 is "all":
+			if {TimeS.%player%} is true:
+				send " " and "{@p}&a&lTime &7stone removed" and " "
+				add lime dye named "&a&lTime" with nbt "{CustomModelData:1}" to player
+				delete {TimeS.%player%}
+			if {PowerS.%player%} is true:
+				send " " and "{@p}&d&lPower &7stone removed" and " "
+				add purple dye named "&d&lPower" with nbt "{CustomModelData:1}" to player
+				delete {PowerS.%player%}
+			if {SoulS.%player%} is true:
+				send " " and "{@p}&e&lSoul &7stone removed" and " "
+				add yellow dye named "&e&lSoul" with nbt "{CustomModelData:1}" to player
+				delete {SoulS.%player%}
+			if {RealityS.%player%} is true:
+				send " " and "{@p}&c&lReality &7stone removed" and " "
+				add red dye named "&4&lReality" with nbt "{CustomModelData:1}" to player
+				delete {RealityS.%player%}
+			if {SpaceS.%player%} is true:
+				send " " and "{@p}&b&lSpace &7stone removed" and " "
+				add light blue dye named "&b&lSpace" with nbt "{CustomModelData:1}" to player
+				delete {SpaceS.%player%}
+			if {MindS.%player%} is true:
+				send " " and "{@p}&6&lMind &7stone removed" and " "
+				add orange dye named "&6&lMind" with nbt "{CustomModelData:1}" to player
+				delete {MindS.%player%}
+
+
+
+		
+
+on tab complete of  "/removestone":
+    set tab completions for position 1 to "Space", "Reality", "Soul", "Mind", "Power", "Time", and "All"
